@@ -23,5 +23,8 @@ At a high level what this means is that all data flows in one direction and comp
 * Rails initially feeds data into the React side via props
 * `<SelectionsForForm/>` dumps the data into what would be hidden inputs for submitting in the usual fashion back to Rails
 
+### Thanks!
 
-
+* [Alt.js](http://alt.js.org/) - an implementation of Flux pattern
+* [Facebook](http://www.facebook.com): for making React in the first place
+* [PlanningCenterOnline](http://get.planningcenteronline.com/): awesome company where I work that embraces cool technology
