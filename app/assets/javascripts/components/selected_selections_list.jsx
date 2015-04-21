@@ -21,10 +21,9 @@ App.SelectedSelectionsList = React.createClass({
           {selectedSelections.map((selection) => {
             return (
               <li>
-                {selection.quantity > 1 ? selection.quantity : null}
+                {selection.quantity > 1 ? <span>{selection.quantity} x </span> : null}
                 {selection.name}
                 &nbsp;{App.Money.centsToFormatted(selection.quantity * selection.amount_cents)}
-                &nbsp;{selection.quantity > 1 ? App.Money.centsToFormatted(selection.amount_cents): null}
               </li>
               );
           })}
