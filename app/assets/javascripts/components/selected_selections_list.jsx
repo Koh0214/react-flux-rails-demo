@@ -8,6 +8,8 @@ App.SelectedSelectionsList = React.createClass({
   },
   render() {
     var selectedSelections = _.filter(this.state.selections.selections, function(selection) { return selection.isChecked && !selection.hasVariations && selection.quantity > 0});
+    var totalCents = _.reduce(selectedSelections, function(memo,selection){ return memo + (selection.quantity * selection.amount_cents); }, 0);
+
     if (!selectedSelections.length) {
       return (
         <span>Nothing Selected</span>
@@ -27,6 +29,7 @@ App.SelectedSelectionsList = React.createClass({
               );
           })}
         </ul>
+        <span>{App.Money.centsToFormatted(totalCents)}</span>
       </div>
     );
   }
