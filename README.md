@@ -27,4 +27,4 @@ At a high level what this means is that all data flows in one direction and comp
 
 * [Alt.js](http://alt.js.org/) - an implementation of Flux pattern
 * [Facebook](http://www.facebook.com): for making React in the first place
-* [PlanningCenterOnline](http://get.planningcenteronline.com/): awesome company where I work that embraces cool technology
+* [Planning Center Online](http://get.planningcenteronline.com/): awesome company where I work that embraces cool technology
