@@ -1,0 +1,8 @@
+p#notice = notice
+
+- @order.order_items.each do |oi|
+  = oi
+
+= link_to 'Edit', edit_order_path(@order)
+'|
+= link_to 'Back', orders_path

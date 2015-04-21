@@ -10,7 +10,7 @@ App.SelectionList = React.createClass({
     App.Actions.SelectionActions.updateSelections(this.props.selections);
   },
   render() {
-    var topLevelSelections = _.filter(this.state.selections.selections, function(aos) { return aos.group_id === null});
+    var topLevelSelections = _.filter(this.state.selections.selections, function(aos) { return aos.itemable_type === "Item"});
     if (!topLevelSelections.length) {
       return (
         <span>Nothing</span>
@@ -19,7 +19,7 @@ App.SelectionList = React.createClass({
     return (
       <form>
         {topLevelSelections.map((selection) => {
-          var variations = _.filter(this.state.selections.selections, function(aos) { return aos.group_id === selection.id});
+          var variations = _.filter(this.state.selections.selections, function(aos) { return aos.itemable_id === selection.id && aos.itemable_type === 'ItemVariation'});
           return (
             <App.SelectionListItem variations={variations} selection={selection} />
             );
