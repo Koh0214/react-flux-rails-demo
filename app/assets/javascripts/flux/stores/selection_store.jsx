@@ -47,10 +47,6 @@
         }
       });
     }
-    handleFetchSelections() {
-      this.selections = [];
-    }
-
     handleSelectionsFailed(errorMessage) {
       this.errorMessage = errorMessage;
     }
