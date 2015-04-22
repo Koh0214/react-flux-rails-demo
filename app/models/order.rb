@@ -1,6 +1,12 @@
 class Order < ActiveRecord::Base
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
   accepts_nested_attributes_for :order_items, allow_destroy: true
+
+  monetize :total_cost_cents
+
+  def total_cost_cents
+    order_items.map(&:cost_cents).sum
+  end
 
   def items_for_order
     items = []

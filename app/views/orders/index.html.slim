@@ -1,19 +1,19 @@
-h1 Listing orders
+h2 Orders
 
-table
+table.table.table-striped.table-bordered
   thead
     tr
-      th
-      th
-      th
+      th #
+      th Items
+      th Total
 
   tbody
     - @orders.each do |order|
       tr
-        td = link_to 'Show', order
-        td = link_to 'Edit', edit_order_path(order)
-        td = link_to 'Destroy', order, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to "##{order.id}", order
+        td = order.order_items.map(&:name_to_s).to_sentence
+        td = humanized_money_with_symbol(order.total_cost)
 
 br
 
-= link_to 'New Order', new_order_path
+= link_to 'New Order', new_order_path, class: 'btn btn-default'

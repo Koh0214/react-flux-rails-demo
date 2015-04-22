@@ -1,8 +1,19 @@
-p#notice = notice
+.panel.panel-default
+  .panel-heading ##{@order.id}
+  table.table.table-striped.table-bordered
+    thead
+      tr
+        th Item
+        th Quantity
+        th Cost
 
-- @order.order_items.each do |oi|
-  = oi
+    tbody
+      - @order.order_items.each do |oi|
+        tr
+          td = oi.name_to_s
+          td = oi.quantity
+          td = humanized_money_with_symbol(oi.cost)
 
-= link_to 'Edit', edit_order_path(@order)
-'|
-= link_to 'Back', orders_path
+p
+  = link_to 'Edit', edit_order_path(@order), class: 'btn btn-default'
+  = link_to 'Destroy', @order, class: 'btn', data: {:confirm => 'Are you sure?'}, :method => :delete

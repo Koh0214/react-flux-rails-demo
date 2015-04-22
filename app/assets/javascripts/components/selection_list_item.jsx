@@ -56,7 +56,7 @@ App.SelectionListItemTextInput = React.createClass({
 App.SelectionListItemSelectInput = React.createClass({
   onChange() {
     groupId = parseInt($(event.target).find(':selected').data('group-id'))
-    quandon = { id: parseInt(event.target.value), itemable_id: groupId, isChecked: false};
+    quandon = { id: parseInt(event.target.value), item_id: groupId, isChecked: false};
     App.Actions.SelectionActions.selectSelectionVariation(quandon);
   },
   render() {
@@ -64,7 +64,7 @@ App.SelectionListItemSelectInput = React.createClass({
       <select onChange={this.onChange}>
         {this.props.variations.map((variation) => {
           return (
-            <option value={variation.id} data-group-id={variation.itemable_id}>{variation.name} - {App.Money.centsToFormatted(variation.amount_cents)}</option>
+            <option value={variation.id} data-group-id={variation.item_id}>{variation.name} - {App.Money.centsToFormatted(variation.amount_cents)}</option>
             );
         })}
       </select>
