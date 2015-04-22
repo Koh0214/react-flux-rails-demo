@@ -10,26 +10,32 @@ App.SelectedSelectionsList = React.createClass({
     var selectedSelections = _.filter(this.state.selections.selections, function(selection) { return selection.isChecked && !selection.hasVariations && selection.quantity > 0});
     var totalCents = _.reduce(selectedSelections, function(memo,selection){ return memo + (selection.quantity * selection.amount_cents); }, 0);
 
-    if (!selectedSelections.length) {
-      return (
-        <span>Nothing Selected</span>
-      );
-    }
     return (
-      <div>
-        <ul>
+      <table className='table table-striped table-bordered'>
+        <thead>
+          <tr>
+            <th>Qty</th>
+            <th>Item</th>
+            <th>Total Cost</th>
+          </tr>
+        </thead>
+        <tbody>
           {selectedSelections.map((selection) => {
             return (
-              <li>
-                {selection.quantity > 1 ? <span>{selection.quantity} x </span> : null}
-                {selection.name}
-                &nbsp;{App.Money.centsToFormatted(selection.quantity * selection.amount_cents)}
-              </li>
+              <tr>
+                <td>{selection.quantity}</td>
+                <td>{selection.name}</td>
+                <td>{App.Money.centsToFormatted(selection.quantity * selection.amount_cents)}</td>
+              </tr>
               );
           })}
-        </ul>
-        <span>{App.Money.centsToFormatted(totalCents)}</span>
-      </div>
+          <tr className='info'>
+            <td></td>
+            <td>Total</td>
+            <td>{App.Money.centsToFormatted(totalCents)}</td>
+          </tr>
+        </tbody>
+      </table>
     );
   }
 });
