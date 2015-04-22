@@ -35,7 +35,7 @@
       this.selections.forEach((selection) => {
         if (selection.id === selectedVariation.id) {
           selection.isChecked = true;
-        } else if (selection.group_id === selectedVariation.group_id) {
+        } else if (selection.itemable_id === selectedVariation.itemable_id) {
           selection.isChecked = false;
         }
       });
