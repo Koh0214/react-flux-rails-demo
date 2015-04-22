@@ -56,6 +56,6 @@ class OrdersController < ApplicationController
 
     def order_params
       permits = [order_items_attributes: [:id, :order_id, :quantity, :itemable_id, :itemable_type, :_destroy]]
-      params.require(:order).permit(permits)
+      params[:order].permit(permits)
     end
 end

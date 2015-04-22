@@ -8,6 +8,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-accounting'
 end
 gem 'slim-rails', '~> 3.0.1'
+gem 'money-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
