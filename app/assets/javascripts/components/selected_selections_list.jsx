@@ -24,7 +24,7 @@ App.SelectedSelectionsList = React.createClass({
             return (
               <tr>
                 <td>{selection.quantity}</td>
-                <td>{selection.name}</td>
+                <td>{selection.name_to_s}</td>
                 <td>{App.Money.centsToFormatted(selection.quantity * selection.amount_cents)}</td>
               </tr>
               );

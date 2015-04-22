@@ -18,6 +18,7 @@ module IsSelectable
     {
       id: id,
       name: name,
+      name_to_s: name_to_s,
       amount_cents: amount_cents,
       allowMultiple: allow_multiple,
       maxQuantity: max_quantity.present? ? max_quantity : 1,
