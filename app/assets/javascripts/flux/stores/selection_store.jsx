@@ -18,7 +18,7 @@
 
     handleQuantityForSelection(quandon) {
       this.selections.forEach((selection) => {
-        if (selection.id === quandon.id) {
+        if (selection.id === quandon.id && selection.itemable_type === quandon.itemable_type) {
           selection.quantity = quandon.qty;
         }
       });

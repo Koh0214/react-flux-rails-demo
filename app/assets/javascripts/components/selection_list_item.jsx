@@ -39,7 +39,7 @@ App.SelectionListItemTextInput = React.createClass({
     if (requestedQty <= 0 || isNaN(requestedQty)) {
       requestedQty = 1;
     }
-    quandon = { id: this.props.selection.id, qty: requestedQty};
+    quandon = { id: this.props.selection.id, qty: requestedQty, itemable_type: this.props.selection.itemable_type};
     App.Actions.SelectionActions.quantityForSelection(quandon);
   },
   render() {
