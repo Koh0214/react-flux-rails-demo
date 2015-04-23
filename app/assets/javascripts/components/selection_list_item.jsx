@@ -20,7 +20,6 @@ App.SelectionListItem = React.createClass({
           />
           &nbsp; {this.props.selection.name}
           &nbsp; {this.props.selection.amount_cents > 0 ? App.Money.centsToFormatted(this.props.selection.amount_cents) : null}
-          { this.props.selection.allowMultiple ? <span>&nbsp;each</span> : null}
         </label>
         {this.shouldRenderSelect() ? <App.SelectionListItemSelectInput variations={this.props.variations} /> : null}
         {this.shouldRenderSlave() ? <App.SelectionListItemTextInput selection={this.props.selection} /> : null}
@@ -32,10 +31,13 @@ App.SelectionListItem = React.createClass({
 App.SelectionListItemTextInput = React.createClass({
   onChange() {
     requestedQty = parseInt(event.target.value);
-    if (requestedQty > this.props.selection.maxQuantity) {
+    if (this.props.selection.maxQuantity === 0) {
+      // leave it
+    } else if (requestedQty > this.props.selection.maxQuantity) {
       requestedQty = this.props.selection.maxQuantity;
-    } else if (requestedQty < 0 || isNaN(requestedQty)) {
-      requestedQty = 0;
+    };
+    if (requestedQty <= 0 || isNaN(requestedQty)) {
+      requestedQty = 1;
     }
     quandon = { id: this.props.selection.id, qty: requestedQty};
     App.Actions.SelectionActions.quantityForSelection(quandon);
@@ -44,7 +46,7 @@ App.SelectionListItemTextInput = React.createClass({
     return (
       <label>
         <input
-          type="text"
+          type="number"
           onChange={this.onChange}
           value={this.props.selection.quantity}
         />
@@ -59,15 +61,24 @@ App.SelectionListItemSelectInput = React.createClass({
     quandon = { id: parseInt(event.target.value), item_id: groupId, isChecked: false};
     App.Actions.SelectionActions.selectSelectionVariation(quandon);
   },
+  shouldRenderSlave() {
+    return this.selectedVariation() && this.selectedVariation().allowMultiple === true
+  },
+  selectedVariation() {
+    return _.filter(this.props.variations, function(variation) { return variation.isChecked && variation.quantity > 0})[0];
+  },
   render() {
     return (
-      <select onChange={this.onChange}>
-        {this.props.variations.map((variation) => {
-          return (
-            <option value={variation.id} data-group-id={variation.item_id}>{variation.name} - {App.Money.centsToFormatted(variation.amount_cents)}</option>
-            );
-        })}
-      </select>
+      <div>
+        <select onChange={this.onChange}>
+          {this.props.variations.map((variation) => {
+            return (
+              <option value={variation.id} selected={variation.isChecked} data-group-id={variation.item_id}>{variation.name} - {App.Money.centsToFormatted(variation.amount_cents)}</option>
+              );
+          })}
+        </select>
+        {this.shouldRenderSlave() ? <App.SelectionListItemTextInput selection={this.selectedVariation()} /> : null}
+      </div>
     );
   }
 });
