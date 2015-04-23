@@ -49,6 +49,7 @@ App.SelectionListItemTextInput = React.createClass({
           type="number"
           onChange={this.onChange}
           value={this.props.selection.quantity}
+          className="form-control"
         />
       </label>
     );
@@ -70,7 +71,7 @@ App.SelectionListItemSelectInput = React.createClass({
   render() {
     return (
       <div>
-        <select onChange={this.onChange}>
+        <select className='form-control' onChange={this.onChange}>
           {this.props.variations.map((variation) => {
             return (
               <option value={variation.id} selected={variation.isChecked} data-group-id={variation.item_id}>{variation.name} - {App.Money.centsToFormatted(variation.amount_cents)}</option>
