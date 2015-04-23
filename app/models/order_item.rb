@@ -10,11 +10,13 @@ class OrderItem < ActiveRecord::Base
     quantity * cost_each_cents
   end
 
-  def to_s
-    if quantity > 1
-      "#{name} x #{quantity}"
-    else 
-      name
+  def name_to_s
+    "#{itemable.name_to_s}#{quantity_to_s}"
+  end
+
+  def quantity_to_s
+    if quantity.present? && quantity > 1
+      " x #{quantity}"
     end
   end
 

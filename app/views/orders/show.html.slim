@@ -4,14 +4,12 @@
     thead
       tr
         th Item
-        th Quantity
         th Cost
 
     tbody
       - @order.order_items.each do |oi|
         tr
           td = oi.name_to_s
-          td = oi.quantity
           td = humanized_money_with_symbol(oi.cost)
 
 p
